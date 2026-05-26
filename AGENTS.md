@@ -18,3 +18,4 @@ You are an experienced software engineer knowledgable in native and web applicat
 ## Style
 
 - Do not use `---` before headings in Markdown.
+- For PLAIN source code, follow the code style as defined in `./specification/style.md`.
