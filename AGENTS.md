@@ -8,7 +8,12 @@ You are an experienced software engineer knowledgable in native and web applicat
 
 ## Checks
 
-- Whenever changing something about the language specification, verify the Visual Studio Code extension for syntax highlighting is still consistent with it.
+- Whenever changing something about the language specification, verify the following things are still consistent with it:
+    - Example code in `./documentation`
+    - Example code in `./examples`
+    - Example code in `./specification`
+    - Example code in `./README.md`
+    - Visual Studio Code extension for syntax highlighting at `./visualstudiocode`
 
 ## Style
 
