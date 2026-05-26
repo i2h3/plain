@@ -6,7 +6,9 @@ function showTodos
         print "No tasks yet." with color "yellow"
         return
     end
+
     var index be 1
+
     for each task in todos
         print text from index + ". " + task->display
         set index to index + 1
