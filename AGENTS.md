@@ -1,0 +1,1 @@
+Read decisions.md, specification/language.md, and specification/standard-library.md before anything else. We are continuing the design of the PLAIN language. Today's focus is [whatever comes next].
