@@ -78,7 +78,7 @@ try
     let n be number from "42"
     let d be decimal from "3.14"
 catch error
-    print error->message
+    print message of error
 end
 ```
 
@@ -153,7 +153,7 @@ if any of users where age > 18
 if all of users where age > 18
 ```
 
-In `where` clauses, property names refer implicitly to the current item. No `item->` prefix is needed.
+In `where` clauses, property names refer implicitly to the current item. No `of item` suffix is needed.
 
 ---
 
@@ -227,7 +227,7 @@ try
     let d be moment from "2025-06-01"
     let d be moment from "01/06/2025" with format "dd/MM/yyyy"
 catch error
-    print error->message
+    print message of error
 end
 ```
 
@@ -286,7 +286,7 @@ delete directory at p
 try
     let content be contents of file at p
 catch error
-    print "Could not read: " + error->message
+    print "Could not read: " + message of error
 end
 ```
 
@@ -333,7 +333,7 @@ try
         print "HTTP error: " + text from status of result
     end
 catch error
-    print "Network error: " + error->message
+    print "Network error: " + message of error
 end
 ```
 

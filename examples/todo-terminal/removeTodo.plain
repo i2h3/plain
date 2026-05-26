@@ -14,5 +14,5 @@ function removeTodo index as number
 
     let task be item at index - 1 in todos
     remove task from todos
-    print "Removed: " + task->title with color "yellow"
+    print "Removed: " + title of task with color "yellow"
 end

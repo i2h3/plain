@@ -34,13 +34,13 @@ class employee extends person is greeter
     property department as text
 
     init with name as text and age as number and department as text
-        set this->name       to name
-        set this->age        to age
-        set this->department to department
+        set name       of this to name
+        set age        of this to age
+        set department of this to department
     end
 
     function greet returns text
-        return "Hello, I am " + this->name + " from " + this->department
+        return "Hello, I am " + name of this + " from " + department of this
     end
 end
 
@@ -56,7 +56,7 @@ task function main
     end
 
     for each emp in sort of employees by name
-        print emp->greet
+        print greet of emp
     end
 end
 ```

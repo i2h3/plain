@@ -13,6 +13,6 @@ function completeTodo index as number
     end
 
     let task be item at index - 1 in todos
-    set task->done to true
-    print "Completed: " + task->title with color "green"
+    set done of task to true
+    print "Completed: " + title of task with color "green"
 end

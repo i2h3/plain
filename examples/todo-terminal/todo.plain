@@ -6,12 +6,12 @@ class todo
     property done  as bool
 
     init with title as text
-        set this->title to title
-        set this->done  to false
+        set title of this to title
+        set done  of this to false
     end
 
     function display returns text
-        let mark be if this->done then "[x]" else "[ ]"
-        return mark + " " + this->title
+        let mark be if done of this then "[x]" else "[ ]"
+        return mark + " " + title of this
     end
 end

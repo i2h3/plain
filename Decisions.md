@@ -30,9 +30,9 @@ Keywords are English words but not idioms or Americanisms. The language is not t
 
 `name as text` reads naturally as *name, as a text value*. The colon (`:`) was rejected as it carries no natural English meaning.
 
-### `->` for member access
+### `of` for member access
 
-Dot notation (`.`) was replaced with `->` because it is more visually distinctive and cannot be confused with a decimal point or sentence punctuation. `iva->name` reads as *iva's name* when spoken, and stands out clearly in dense code.
+Dot notation (`.`) and `->` were both considered and rejected. Dot is visually ambiguous with decimal points and sentence punctuation. `->` is distinctive but is still a cryptic symbol, inconsistent with the keyword-first philosophy. `of` was chosen because it already appears throughout PLAIN (`body of response`, `sort of employees by name`, `length of myText`) and requires no new syntax. `name of iva` reads as natural English and is immediately understood by non-programmers. The reversed order (property before object) is consistent with the noun-form pattern used by all standard library operations.
 
 ### `with … and …` for object construction
 
@@ -52,7 +52,7 @@ Rather than returning `number or nothing` for a single position, `positions of "
 
 ### Implicit item in `where` clauses
 
-`filter of users where age > 18` does not require `item->age`. The compiler resolves bare property names in `where` clauses against the item type of the collection. The `item->` prefix was considered redundant and was removed after review — the context makes the referent unambiguous.
+`filter of users where age > 18` does not require `age of item`. The compiler resolves bare property names in `where` clauses against the item type of the collection. The `of item` suffix was considered redundant and was removed after review — the context makes the referent unambiguous.
 
 ### `sort of users by descending age`
 

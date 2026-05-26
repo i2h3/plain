@@ -10,7 +10,6 @@
         { "include": "#constant" },
         { "include": "#language-variable" },
         { "include": "#entity-declaration" },
-        { "include": "#member-access" },
         { "include": "#stdlib-function" },
         { "include": "#storage" },
         { "include": "#control" },
@@ -101,14 +100,6 @@
             ]
         },
 
-        "member-access": {
-            "comment": "Property and method access via ->, e.g. emp->name",
-            "match": "(->)([a-zA-Z][a-zA-Z0-9_]*)",
-            "captures": {
-                "1": { "name": "keyword.operator.accessor.plain" },
-                "2": { "name": "variable.other.member.plain" }
-            }
-        },
 
         "stdlib-function": {
             "comment": "Standard library noun-form functions when immediately followed by 'of'",
@@ -147,13 +138,8 @@
         },
 
         "operator-symbol": {
-            "comment": "Symbolic operators: accessor, comparison, arithmetic",
+            "comment": "Symbolic operators: comparison and arithmetic",
             "patterns": [
-                {
-                    "comment": "Standalone -> (fallback for member-access when not followed by identifier)",
-                    "name": "keyword.operator.accessor.plain",
-                    "match": "->"
-                },
                 {
                     "name": "keyword.operator.comparison.plain",
                     "match": ">=|<=|>|<"

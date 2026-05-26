@@ -10,7 +10,7 @@ function showTodos
     var index be 1
 
     for each task in todos
-        print text from index + ". " + task->display
+        print text from index + ". " + display of task
         set index to index + 1
     end
 end

@@ -93,17 +93,17 @@ class person
     property age  as number
 
     init with name as text and age as number
-        set this->name to name
-        set this->age  to age
+        set name of this to name
+        set age  of this to age
     end
 
     function introduce returns text
-        return "I am " + this->name + "."
+        return "I am " + name of this + "."
     end
 end
 
 let iva be person with name "Iva" and age 30
-print iva->introduce
+print introduce of iva
 ```
 
 ### Control flow
@@ -133,9 +133,9 @@ error fileNotFound with path as text
 try
     let content be contents of file at p
 catch fileNotFound as error
-    print "Not found: " + error->path
+    print "Not found: " + path of error
 catch error
-    print "Unexpected: " + error->message
+    print "Unexpected: " + message of error
 end
 ```
 

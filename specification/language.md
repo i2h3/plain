@@ -169,7 +169,7 @@ shared var requestCount be 0
 ```plain
 set counter to counter + 1
 set name    to "New Name"
-set this->department to department
+set department of this to department
 set item at 1 in colours to "Teal"
 set "Iva" in ages to 31
 ```
@@ -209,12 +209,12 @@ and   or   not
 ### 6.4 Property and method access
 
 ```plain
-iva->name
-iva->introduce
-emp->describe
+name of iva
+introduce of iva
+describe of emp
 ```
 
-`->` accesses a property or calls a method on an object.
+`of` accesses a property or calls a method on an object.
 
 ### 6.5 Inline conditional expression
 
@@ -355,12 +355,12 @@ class person
     property age  as number
 
     init with name as text and age as number
-        set this->name to name
-        set this->age  to age
+        set name of this to name
+        set age  of this to age
     end
 
     function introduce returns text
-        return "I am " + this->name + ", " + this->age + " years old."
+        return "I am " + name of this + ", " + age of this + " years old."
     end
 end
 ```
@@ -383,7 +383,7 @@ class employee extends person
 
     init with name as text and age as number and department as text
         parent with name name and age age
-        set this->department to department
+        set department of this to department
     end
 end
 ```
@@ -405,7 +405,7 @@ A class declares conformance with `is`:
 ```plain
 class employee extends person is describable
     function describe returns text
-        return this->introduce + " — " + this->department
+        return introduce of this + " — " + department of this
     end
 end
 ```
@@ -420,7 +420,7 @@ Runtime conformance check:
 
 ```plain
 if emp is describable
-    print emp->describe
+    print describe of emp
 end
 ```
 
@@ -455,14 +455,14 @@ class user is codable
     property age  as number
 
     decode from data as json
-        set this->name to text of "full_name" in data
-        set this->age  to number of "years" in data
+        set name of this to text of "full_name" in data
+        set age  of this to number of "years" in data
     end
 
     encode returns json
         let data be json object
-        set "full_name" in data to this->name
-        set "years"     in data to this->age
+        set "full_name" in data to name of this
+        set "years"     in data to age of this
         return data
     end
 end
@@ -491,9 +491,9 @@ throw networkFailure with code 404 and message "Not found"
 try
     let result be riskyOperation
 catch networkFailure as error
-    print "Network error " + text from error->code + ": " + error->message
+    print "Network error " + text from code of error + ": " + message of error
 catch error
-    print "Unexpected error: " + error->message
+    print "Unexpected error: " + message of error
 end
 ```
 
@@ -587,8 +587,8 @@ if ages has "Iva"
 | Declare mutable | `var name [as type] be value` |
 | Assign | `set target to value` |
 | Call function | `name [value] [prep value]*` |
-| Call method | `object->name [value] [prep value]*` |
-| Read property | `object->property` |
+| Call method | `method of object [value] [prep value]*` |
+| Read property | `property of object` |
 | Construct object | `TypeName with property value [and property value]*` |
 | Add to list | `add value to list` |
 | Remove from list | `remove value from list` |

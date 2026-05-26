@@ -19,8 +19,6 @@ Syntax highlighting for the [PLAIN programming language](../README.md). PLAIN so
 | Built-in types (`text` `number` `decimal` `bool` `list` …) | `support.type` | teal |
 | Structural keywords (`be` `as` `to` `from` `of` `set` `print` …) | `keyword.other` | grey-blue |
 | Standard library functions (`sort` `filter` `length` `round` …) | `support.function.builtin` | green |
-| `->` member access | `keyword.operator.accessor` | yellow |
-| Member name after `->` | `variable.other.member` | light |
 | Arithmetic `+ - * /` | `keyword.operator.arithmetic` | white |
 | Comparison `> < >= <=` | `keyword.operator.comparison` | white |
 

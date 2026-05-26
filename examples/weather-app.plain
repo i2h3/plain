@@ -81,19 +81,19 @@ task function main
             let location be await geocode city
         end
 
-        let weather be await fetchWeather location->latitude and location->longitude
+        let weather be await fetchWeather latitude of location and longitude of location
 
-        let current be weather->current
-        let desc    be weatherDescription current->weatherCode
+        let current be current of weather
+        let desc    be weatherDescription weatherCode of current
 
         print ""
-        print location->name + ", " + location->country with style bold
+        print name of location + ", " + country of location with style bold
         print "Condition:   " + desc
-        print "Temperature: " + text from round of current->temperature to places 1 + "°C"
-        print "Wind speed:  " + text from round of current->windspeed to places 1 + " km/h"
+        print "Temperature: " + text from round of temperature of current to places 1 + "°C"
+        print "Wind speed:  " + text from round of windspeed of current to places 1 + " km/h"
 
     catch error
-        print "Error: " + error->message with color "red"
+        print "Error: " + message of error with color "red"
         exit with code 1
     end
 end
