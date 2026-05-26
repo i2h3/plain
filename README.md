@@ -66,14 +66,11 @@ end
 ## Repository structure
 
 ```
-plain-lang/
+plain/
     specification/          Language and standard library specification
     documentation/          Guides and reference
     tutorial/               Step-by-step learning path
     examples/               Runnable example programs
-    transpiler/             PLAIN → C transpiler (Swift)
-        Sources/PlainLang/  Transpiler source
-        Runtime/            C runtime support library
     tools/                  plain build, plain run, plain check
 ```
 
@@ -87,7 +84,7 @@ See [documentation/getting-started.md](documentation/getting-started.md).
 
 ## Status
 
-PLAIN is in active design and early implementation. The language specification is complete. The transpiler is under development.
+PLAIN is in active design and early implementation.
 
 ---
 
