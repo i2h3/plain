@@ -1,0 +1,99 @@
+// weather-app.plain
+// Fetches and displays current weather for a given city
+// Uses the Open-Meteo API (no API key required)
+
+class coordinates is codable
+    property latitude  as decimal
+    property longitude as decimal
+end
+
+class geocodeResult is codable
+    property name      as text
+    property latitude  as decimal   mapping "latitude"
+    property longitude as decimal   mapping "longitude"
+    property country   as text
+end
+
+class currentWeather is codable
+    property temperature      as decimal  mapping "temperature_2m"
+    property windspeed        as decimal  mapping "wind_speed_10m"
+    property weatherCode      as number   mapping "weather_code"
+end
+
+class weatherResponse is codable
+    property current as currentWeather
+end
+
+function weatherDescription code as number returns text
+    if code is 0
+        return "Clear sky"
+    else if code <= 3
+        return "Partly cloudy"
+    else if code <= 48
+        return "Foggy"
+    else if code <= 67
+        return "Rainy"
+    else if code <= 77
+        return "Snowy"
+    else if code <= 82
+        return "Rain showers"
+    else
+        return "Thunderstorm"
+    end
+end
+
+task function geocode city as text returns geocodeResult
+    let url be "https://geocoding-api.open-meteo.com/v1/search?name=" + city + "&count=1"
+    let response be response of get from url
+
+    if status of response is not 200
+        throw error with message "Geocoding failed"
+    end
+
+    let data be parse json from body of response
+    let results be list of "results" in data
+
+    if results is empty
+        throw error with message "City not found: " + city
+    end
+
+    return geocodeResult from json item at 0 in results
+end
+
+task function fetchWeather lat as decimal and lon as decimal returns weatherResponse
+    let url be "https://api.open-meteo.com/v1/forecast?latitude=" + text from lat + "&longitude=" + text from lon + "&current=temperature_2m,wind_speed_10m,weather_code"
+    let response be response of get from url
+
+    if status of response is not 200
+        throw error with message "Weather fetch failed"
+    end
+
+    return weatherResponse from json body of response
+end
+
+task function main
+    let city be input with prompt "Enter city name: "
+
+    print "Fetching weather for " + city + "..." with color "cyan"
+
+    try
+        parallel
+            let location be await geocode city
+        end
+
+        let weather be await fetchWeather location->latitude and location->longitude
+
+        let current be weather->current
+        let desc    be weatherDescription current->weatherCode
+
+        print ""
+        print location->name + ", " + location->country with style bold
+        print "Condition:   " + desc
+        print "Temperature: " + text from round of current->temperature to places 1 + "°C"
+        print "Wind speed:  " + text from round of current->windspeed to places 1 + " km/h"
+
+    catch error
+        print "Error: " + error->message with color "red"
+        exit with code 1
+    end
+end

@@ -1,0 +1,117 @@
+// todo-terminal.plain
+// A simple terminal todo list application
+
+class todo
+    property title as text
+    property done  as bool
+
+    init with title as text
+        set this->title to title
+        set this->done  to false
+    end
+
+    function display returns text
+        let mark be if this->done then "[x]" else "[ ]"
+        return mark + " " + this->title
+    end
+end
+
+var todos as list of todo
+
+function showTodos
+    if todos is empty
+        print "No tasks yet." with color "yellow"
+        return
+    end
+    var index be 1
+    for each task in todos
+        print text from index + ". " + task->display
+        set index to index + 1
+    end
+end
+
+function addTodo title as text
+    add todo with title title to todos
+    print "Added: " + title with color "green"
+end
+
+function completeTodo index as number
+    if index < 1
+        print "Invalid task number." with color "red"
+        return
+    end
+    if index > length of todos
+        print "Invalid task number." with color "red"
+        return
+    end
+    let task be item at index - 1 in todos
+    set task->done to true
+    print "Completed: " + task->title with color "green"
+end
+
+function removeTodo index as number
+    if index < 1
+        print "Invalid task number." with color "red"
+        return
+    end
+    if index > length of todos
+        print "Invalid task number." with color "red"
+        return
+    end
+    let task be item at index - 1 in todos
+    remove task from todos
+    print "Removed: " + task->title with color "yellow"
+end
+
+function showHelp
+    print "Commands:" with style bold
+    print "  add <title>      Add a new task"
+    print "  done <number>    Mark a task as complete"
+    print "  remove <number>  Remove a task"
+    print "  list             Show all tasks"
+    print "  quit             Exit"
+end
+
+print "PLAIN Todo" with style bold
+print "Type 'help' for commands."
+
+var running be true
+while running
+    let raw be input with prompt "> "
+    let command be trim of raw
+
+    if command is "list"
+        showTodos
+    else if command is "help"
+        showHelp
+    else if command is "quit"
+        set running to false
+    else if "add " is prefix of command
+        let title be substring of command from 4 to length of command
+        if title is empty
+            print "Usage: add <title>" with color "yellow"
+        else
+            addTodo title
+        end
+    else if "done " is prefix of command
+        let rest be substring of command from 5 to length of command
+        try
+            let index be number from rest
+            completeTodo index
+        catch error
+            print "Usage: done <number>" with color "yellow"
+        end
+    else if "remove " is prefix of command
+        let rest be substring of command from 7 to length of command
+        try
+            let index be number from rest
+            removeTodo index
+        catch error
+            print "Usage: remove <number>" with color "yellow"
+        end
+    else if command is not ""
+        print "Unknown command. Type 'help' for commands." with color "yellow"
+    end
+end
+
+print "Goodbye!"
