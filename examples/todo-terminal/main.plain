@@ -1,0 +1,59 @@
+// main.plain
+// Global state and main application loop
+
+var todos as list of todo
+
+print "PLAIN Todo" with style bold
+print "Type 'help' for commands."
+
+var running be true
+
+while running
+    let raw be input with prompt "> "
+    let command be trim of raw
+
+    if command is "list"
+        showTodos
+
+    else if command is "help"
+        showHelp
+
+    else if command is "quit"
+        set running to false
+
+    else if "add " is prefix of command
+        let title be substring of command from 4 to length of command
+
+        if title is empty
+            print "Usage: add <title>" with color "yellow"
+        else
+            addTodo title
+        end
+
+    else if "done " is prefix of command
+        let rest be substring of command from 5 to length of command
+
+        try
+            let index be number from rest
+            completeTodo index
+        catch error
+            print "Usage: done <number>" with color "yellow"
+        end
+
+    else if "remove " is prefix of command
+        let rest be substring of command from 7 to length of command
+
+        try
+            let index be number from rest
+            removeTodo index
+        catch error
+            print "Usage: remove <number>" with color "yellow"
+        end
+
+    else if command is not ""
+        print "Unknown command. Type 'help' for commands." with color "yellow"
+
+    end
+end
+
+print "Goodbye!"

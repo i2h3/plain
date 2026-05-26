@@ -1,0 +1,17 @@
+// todo.plain
+// The todo class
+
+class todo
+    property title as text
+    property done  as bool
+
+    init with title as text
+        set this->title to title
+        set this->done  to false
+    end
+
+    function display returns text
+        let mark be if this->done then "[x]" else "[ ]"
+        return mark + " " + this->title
+    end
+end

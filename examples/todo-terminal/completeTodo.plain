@@ -1,0 +1,16 @@
+// completeTodo.plain
+// Marks a task as complete by its 1-based index
+
+function completeTodo index as number
+    if index < 1
+        print "Invalid task number." with color "red"
+        return
+    end
+    if index > length of todos
+        print "Invalid task number." with color "red"
+        return
+    end
+    let task be item at index - 1 in todos
+    set task->done to true
+    print "Completed: " + task->title with color "green"
+end

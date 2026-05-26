@@ -1,0 +1,11 @@
+// showHelp.plain
+// Prints the list of available commands
+
+function showHelp
+    print "Commands:" with style bold
+    print "  add <title>      Add a new task"
+    print "  done <number>    Mark a task as complete"
+    print "  remove <number>  Remove a task"
+    print "  list             Show all tasks"
+    print "  quit             Exit"
+end
