@@ -1,0 +1,169 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "PLAIN",
+    "scopeName": "source.plain",
+    "fileTypes": ["plain"],
+    "patterns": [
+        { "include": "#comment" },
+        { "include": "#string" },
+        { "include": "#number" },
+        { "include": "#constant" },
+        { "include": "#language-variable" },
+        { "include": "#entity-declaration" },
+        { "include": "#member-access" },
+        { "include": "#stdlib-function" },
+        { "include": "#storage" },
+        { "include": "#control" },
+        { "include": "#operator-word" },
+        { "include": "#type" },
+        { "include": "#keyword" },
+        { "include": "#operator-symbol" }
+    ],
+    "repository": {
+
+        "comment": {
+            "name": "comment.line.double-slash.plain",
+            "match": "\\/\\/.*$"
+        },
+
+        "string": {
+            "name": "string.quoted.double.plain",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.plain",
+                    "match": "\\\\[\"\\\\nt]"
+                }
+            ]
+        },
+
+        "number": {
+            "name": "constant.numeric.plain",
+            "match": "\\b(0|[1-9][0-9]*)(\\.[0-9]+)?\\b"
+        },
+
+        "constant": {
+            "name": "constant.language.plain",
+            "match": "\\b(true|false|nothing)\\b"
+        },
+
+        "language-variable": {
+            "comment": "Self-reference and parent-class access",
+            "name": "variable.language.plain",
+            "match": "\\b(this|parent)\\b"
+        },
+
+        "entity-declaration": {
+            "comment": "Declaration keywords paired with the name they introduce",
+            "patterns": [
+                {
+                    "comment": "task function name",
+                    "match": "\\b(task)\\s+(function)\\s+([a-zA-Z][a-zA-Z0-9_]*)",
+                    "captures": {
+                        "1": { "name": "storage.type.plain" },
+                        "2": { "name": "storage.type.plain" },
+                        "3": { "name": "entity.name.function.plain" }
+                    }
+                },
+                {
+                    "comment": "function name",
+                    "match": "\\b(function)\\s+([a-zA-Z][a-zA-Z0-9_]*)",
+                    "captures": {
+                        "1": { "name": "storage.type.plain" },
+                        "2": { "name": "entity.name.function.plain" }
+                    }
+                },
+                {
+                    "comment": "class name",
+                    "match": "\\b(class)\\s+([a-zA-Z][a-zA-Z0-9_]*)",
+                    "captures": {
+                        "1": { "name": "storage.type.plain" },
+                        "2": { "name": "entity.name.type.plain" }
+                    }
+                },
+                {
+                    "comment": "feature name",
+                    "match": "\\b(feature)\\s+([a-zA-Z][a-zA-Z0-9_]*)",
+                    "captures": {
+                        "1": { "name": "storage.type.plain" },
+                        "2": { "name": "entity.name.type.plain" }
+                    }
+                },
+                {
+                    "comment": "error type name",
+                    "match": "\\b(error)\\s+([a-zA-Z][a-zA-Z0-9_]*)",
+                    "captures": {
+                        "1": { "name": "storage.type.plain" },
+                        "2": { "name": "entity.name.type.plain" }
+                    }
+                }
+            ]
+        },
+
+        "member-access": {
+            "comment": "Property and method access via ->, e.g. emp->name",
+            "match": "(->)([a-zA-Z][a-zA-Z0-9_]*)",
+            "captures": {
+                "1": { "name": "keyword.operator.accessor.plain" },
+                "2": { "name": "variable.other.member.plain" }
+            }
+        },
+
+        "stdlib-function": {
+            "comment": "Standard library noun-form functions when immediately followed by 'of'",
+            "name": "support.function.builtin.plain",
+            "match": "\\b(uppercase|lowercase|trim|reverse|replacement|length|positions|substring|character|parts|words|lines|join|round|floor|ceiling|absolute|power|remainder|minimum|maximum|sort|filter|unique|combination|sum|average|count|first|last|contents|extension|status|body|size|shuffle|response)(?=\\s+of\\b)"
+        },
+
+        "storage": {
+            "comment": "Keywords that open a declaration block or bind a name",
+            "name": "storage.type.plain",
+            "match": "\\b(let|var|shared|function|task|class|feature|error|property|init|decode|encode)\\b"
+        },
+
+        "control": {
+            "comment": "Control flow keywords",
+            "name": "keyword.control.plain",
+            "match": "\\b(if|else|while|for|each|end|return|try|catch|throw|parallel|await|then)\\b"
+        },
+
+        "operator-word": {
+            "comment": "Word-form operators: equality, boolean logic",
+            "name": "keyword.operator.word.plain",
+            "match": "\\b(is|and|or|not)\\b"
+        },
+
+        "type": {
+            "comment": "Built-in types",
+            "name": "support.type.plain",
+            "match": "\\b(text|number|decimal|bool|list|map|channel|json|path|moment|response)\\b"
+        },
+
+        "keyword": {
+            "comment": "Structural prepositions, action verbs, and other language keywords",
+            "name": "keyword.other.plain",
+            "match": "\\b(be|as|to|from|by|with|of|in|at|set|add|remove|print|input|send|receive|run|close|returns|extends|mapping|program|app|start|write|append|copy|move|create|delete|clear|parse|header|random|current|exit)\\b"
+        },
+
+        "operator-symbol": {
+            "comment": "Symbolic operators: accessor, comparison, arithmetic",
+            "patterns": [
+                {
+                    "comment": "Standalone -> (fallback for member-access when not followed by identifier)",
+                    "name": "keyword.operator.accessor.plain",
+                    "match": "->"
+                },
+                {
+                    "name": "keyword.operator.comparison.plain",
+                    "match": ">=|<=|>|<"
+                },
+                {
+                    "name": "keyword.operator.arithmetic.plain",
+                    "match": "[+\\-*/]"
+                }
+            ]
+        }
+
+    }
+}

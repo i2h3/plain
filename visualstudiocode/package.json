@@ -1,0 +1,35 @@
+{
+    "name": "plain-language",
+    "displayName": "PLAIN",
+    "description": "Syntax highlighting for the PLAIN programming language (.plain files)",
+    "version": "0.0.1",
+    "publisher": "plain-lang",
+    "engines": {
+        "vscode": "^1.85.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "plain",
+                "aliases": [
+                    "PLAIN",
+                    "plain"
+                ],
+                "extensions": [
+                    ".plain"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "plain",
+                "scopeName": "source.plain",
+                "path": "./syntaxes/plain.tmLanguage.json"
+            }
+        ]
+    }
+}
