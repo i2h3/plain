@@ -1,5 +1,4 @@
-// main.plain
-// Global state and main application loop
+note Global state and main application loop
 
 var todos as list of todo
 

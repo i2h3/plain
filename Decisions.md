@@ -34,6 +34,14 @@ Keywords are English words but not idioms or Americanisms. The language is not t
 
 Dot notation (`.`) and `->` were both considered and rejected. Dot is visually ambiguous with decimal points and sentence punctuation. `->` is distinctive but is still a cryptic symbol, inconsistent with the keyword-first philosophy. `of` was chosen because it already appears throughout PLAIN (`body of response`, `sort of employees by name`, `length of myText`) and requires no new syntax. `name of iva` reads as natural English and is immediately understood by non-programmers. The reversed order (property before object) is consistent with the noun-form pattern used by all standard library operations.
 
+### `note` for comments, `describe` for documentation comments
+
+`//` was rejected for the same reason as `=` and `:` — it is a symbol with no natural English reading. `note` was chosen as the line comment keyword: it is an English verb that reads naturally (*note that this is a workaround*) and fits the verb-first grammar of the language.
+
+`note` on its own line opens a block comment, closed by `end`, consistent with all other block constructs. `note` after a statement on the same line acts as an inline comment.
+
+`describe` is the documentation comment keyword. It is distinct from `note` to give tooling a clean, unambiguous signal for documentation generation without relying on position heuristics, and to make the author's intent explicit: `note` is for the developer reading the source; `describe` is for the developer consuming the API. Both support line and block (`describe … end`) forms.
+
 ### `with … and …` for object construction
 
 `person with name "Iva" and age 30` was chosen over constructor call syntax because it reads as a natural English description of an object. The `with` introduces the first property and `and` chains additional ones.

@@ -1,6 +1,4 @@
-// showTodos.plain
-// Displays all tasks in the global todos list
-
+describe Displays all tasks in the global todos list.
 function showTodos
     if todos is empty
         print "No tasks yet." with color "yellow"

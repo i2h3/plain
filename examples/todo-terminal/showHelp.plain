@@ -1,6 +1,4 @@
-// showHelp.plain
-// Prints the list of available commands
-
+describe Prints the list of available commands.
 function showHelp
     print "Commands:" with style bold
     print "  add <title>      Add a new task"

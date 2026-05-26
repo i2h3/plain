@@ -62,10 +62,10 @@ print  "Hello"
 ### Declarations
 
 ```plain
-let name be "Iva"               // immutable, type inferred
-let name as text be "Iva"       // immutable, explicit type
-var counter be 0                // mutable
-var buffer as list of text      // mutable, no initial value
+let name be "Iva"               note immutable, type inferred
+let name as text be "Iva"       note immutable, explicit type
+var counter be 0                note mutable
+var buffer as list of text      note mutable, no initial value
 ```
 
 ### Assignment

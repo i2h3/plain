@@ -1,6 +1,4 @@
-// removeTodo.plain
-// Removes a task from the global todos list by its 1-based index
-
+describe Removes a task from the global todos list by its 1-based index.
 function removeTodo index as number
     if index < 1
         print "Invalid task number." with color "red"

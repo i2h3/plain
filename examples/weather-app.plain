@@ -1,6 +1,7 @@
-// weather-app.plain
-// Fetches and displays current weather for a given city
-// Uses the Open-Meteo API (no API key required)
+describe
+    Fetches and displays current weather for a given city.
+    Uses the Open-Meteo API (no API key required).
+end
 
 class coordinates is codable
     property latitude  as decimal

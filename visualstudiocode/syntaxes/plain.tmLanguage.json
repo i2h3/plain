@@ -21,8 +21,42 @@
     "repository": {
 
         "comment": {
-            "name": "comment.line.double-slash.plain",
-            "match": "\\/\\/.*$"
+            "patterns": [
+                {
+                    "comment": "Block note comment: note ... end",
+                    "name": "comment.block.plain",
+                    "begin": "\\bnote\\b(?=[ \\t]*(?:$|\\r\\n?|\\n))",
+                    "beginCaptures": {
+                        "0": { "name": "comment.block.plain" }
+                    },
+                    "end": "\\bend\\b",
+                    "endCaptures": {
+                        "0": { "name": "comment.block.plain" }
+                    }
+                },
+                {
+                    "comment": "Block describe comment: describe ... end",
+                    "name": "comment.block.documentation.plain",
+                    "begin": "\\bdescribe\\b(?=[ \\t]*(?:$|\\r\\n?|\\n))",
+                    "beginCaptures": {
+                        "0": { "name": "comment.block.documentation.plain" }
+                    },
+                    "end": "\\bend\\b",
+                    "endCaptures": {
+                        "0": { "name": "comment.block.documentation.plain" }
+                    }
+                },
+                {
+                    "comment": "Line note comment",
+                    "name": "comment.line.plain",
+                    "match": "\\bnote\\b.*$"
+                },
+                {
+                    "comment": "Line describe documentation comment",
+                    "name": "comment.documentation.plain",
+                    "match": "\\bdescribe\\b.*$"
+                }
+            ]
         },
 
         "string": {

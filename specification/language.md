@@ -27,11 +27,42 @@ Indentation is enforced by the compiler.
 
 ### 2.2 Comments
 
+**Line comment** — `note` followed by any text; the rest of the line is ignored by the compiler.
+
 ```plain
-// This is a line comment
+note This is a line comment
+let x be 1    note inline comment after a statement
 ```
 
-Block comments are not supported.
+**Block comment** — `note` on its own line, closed by `end`.
+
+```plain
+note
+    This explanation spans
+    multiple lines.
+end
+```
+
+**Documentation comment** — `describe` (line or block form) placed immediately before a declaration. Used by documentation tools.
+
+```plain
+describe Returns a greeting for the given name.
+function greet name as text returns text
+    return "Hello, " + name + "!"
+end
+
+describe
+    Represents a registered user.
+    name — the user's display name.
+    age  — the user's age in years.
+end
+class user
+    property name as text
+    property age  as number
+end
+```
+
+`note` and `describe` are reserved keywords and may not be used as identifiers.
 
 ### 2.3 Keywords
 
@@ -45,6 +76,7 @@ parallel run send close channel shared await
 print input add remove
 nothing true false
 program app start
+note describe
 ```
 
 ### 2.4 Identifiers
@@ -127,10 +159,10 @@ let found as text or nothing
 The compiler infers the type of a declaration when it is unambiguous from the assigned value:
 
 ```plain
-let name be "Iva"        // inferred: text
-let age  be 30           // inferred: number
-let price be 19.99       // inferred: decimal
-let active be true       // inferred: bool
+let name be "Iva"        note inferred: text
+let age  be 30           note inferred: number
+let price be 19.99       note inferred: decimal
+let active be true       note inferred: bool
 ```
 
 ---
@@ -231,26 +263,26 @@ Used inside expressions where a conditional value is needed.
 ### 7.1 Declaration
 
 ```plain
-// No parameters
+note No parameters
 function greet returns text
     return "Hello, World!"
 end
 
-// One parameter — direct object, no preposition required
+note One parameter — direct object, no preposition required
 function greet name as text returns text
     return "Hello, " + name + "!"
 end
 
-// Multiple parameters — each after the first requires a preposition
+note Multiple parameters — each after the first requires a preposition
 function connect to host as text on port as number returns bool
-    // ...
+    note ...
 end
 
 function replace old as text with new as text in source as text returns text
-    // ...
+    note ...
 end
 
-// No return value
+note No return value
 function logStatus
     print "Running"
 end
@@ -298,11 +330,11 @@ Task functions run asynchronously. Calling a task function requires `await`. A t
 
 ```plain
 if condition
-    // ...
+    note ...
 else if otherCondition
-    // ...
+    note ...
 else
-    // ...
+    note ...
 end
 ```
 
@@ -310,7 +342,7 @@ end
 
 ```plain
 while condition
-    // ...
+    note ...
 end
 ```
 
@@ -556,23 +588,23 @@ All `.plain` source files in the same build target form one shared namespace. No
 ## 14. Collections — built-in operations
 
 ```plain
-// List mutation
+note List mutation
 add "Purple" to colours
 remove "Red" from colours
 set item at 1 in colours to "Teal"
 
-// List access
+note List access
 let first be item at 0 in colours
 
-// Dictionary mutation
+note Dictionary mutation
 set "Iva" in ages to 31
 add "Bob" with value 26 to ages
 remove "Max" from ages
 
-// Dictionary access
+note Dictionary access
 let age be "Iva" in ages
 
-// Membership
+note Membership
 if "hello" is in myText
 if ages has "Iva"
 ```

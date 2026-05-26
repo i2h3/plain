@@ -1,6 +1,4 @@
-// todo.plain
-// The todo class
-
+describe The todo class.
 class todo
     property title as text
     property done  as bool

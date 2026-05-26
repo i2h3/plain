@@ -1,6 +1,4 @@
-// addTodo.plain
-// Adds a new task to the global todos list
-
+describe Adds a new task to the global todos list.
 function addTodo title as text
     add todo with title title to todos
     print "Added: " + title with color "green"
